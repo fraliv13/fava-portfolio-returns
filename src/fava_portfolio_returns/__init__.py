@@ -170,7 +170,7 @@ class FavaPortfolioReturns(FavaExtensionBase):
         p = self.get_filtered_portfolio(toolbar_ctx)
 
         value_chart = portfolio_values(p, toolbar_ctx.start_date, toolbar_ctx.end_date)
-        performance_chart = TotalPNL().series(p, toolbar_ctx.start_date, toolbar_ctx.end_date)
+        performance_chart = [(v.date, float(v.market - v.cash)) for v in value_chart]
         allocation = portfolio_allocation(p, toolbar_ctx.end_date)
 
         return {
